@@ -131,6 +131,7 @@
   </div>
 
   <!-- LOGIN -->
+
   <section id="auth">
 
     <div id="loginBox" class="card">
@@ -308,53 +309,31 @@
 
 <script type="module">
 
-  /*
-    ==========================================
-    CONFIGURACIÓN DE SUPABASE
-    ==========================================
-
-    NO pongas todavía los datos aquí.
-
-    Después colocaremos:
-
-    SUPABASE_URL
-    SUPABASE_KEY
-
-    La segunda debe ser la PUBLISHABLE KEY.
-
-    NUNCA uses la Secret Key / service_role.
-  */
-
-
   import {
     createClient
   } from
   "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
 
+  /*
+    ==========================================
+    SUPABASE
+    ==========================================
+  */
+
   const SUPABASE_URL =
-    "https://vvcuvkdtkqmnbuujhpll.supabase.co/rest/v1/";
+    "https://vvcuvkdtkqmnbuujhpll.supabase.co";
 
 
   const SUPABASE_KEY =
     "sb_publishable_nFTz3WBpZ0b68QdPAB1BxQ_uHL5UM0f";
 
 
-  let supabase = null;
-
-
-  if (
-    SUPABASE_URL !== "https://vvcuvkdtkqmnbuujhpll.supabase.co/rest/v1/" &&
-    SUPABASE_KEY !== "sb_publishable_nFTz3WBpZ0b68QdPAB1BxQ_uHL5UM0f"
-  ) {
-
-    supabase =
-      createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-      );
-
-  }
+  const supabase =
+    createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
 
 
   /*
@@ -411,7 +390,7 @@
 
 
   /*
-    FUNCIONES AUXILIARES
+    FUNCIONES
   */
 
   function showMessage(
@@ -444,7 +423,7 @@
 
 
   /*
-    CAMBIAR LOGIN / REGISTRO
+    LOGIN / REGISTRO
   */
 
   document
@@ -490,18 +469,6 @@
       "registerButton"
     )
     .onclick = async function() {
-
-      if (!supabase) {
-
-        showMessage(
-          registerMessage,
-          "Primero debemos conectar Supabase."
-        );
-
-        return;
-
-      }
-
 
       const name =
         registerName.value.trim();
@@ -579,6 +546,8 @@
           "Cuenta creada correctamente."
         );
 
+        await loadApplication();
+
       } else {
 
         showMessage(
@@ -601,23 +570,26 @@
     )
     .onclick = async function() {
 
-      if (!supabase) {
-
-        showMessage(
-          loginMessage,
-          "Primero debemos conectar Supabase."
-        );
-
-        return;
-
-      }
-
-
       const email =
         loginEmail.value.trim();
 
       const password =
         loginPassword.value;
+
+
+      if (
+        !email ||
+        !password
+      ) {
+
+        showMessage(
+          loginMessage,
+          "Escribe tu correo y contraseña."
+        );
+
+        return;
+
+      }
 
 
       const {
@@ -1025,47 +997,43 @@
 
 
   /*
-    COMPROBAR SESIÓN EXISTENTE
+    COMPROBAR SESIÓN
   */
 
-  if (supabase) {
+  supabase.auth.onAuthStateChange(
+    function(
+      event,
+      session
+    ) {
 
-    supabase.auth.onAuthStateChange(
-      function(
-        event,
-        session
-      ) {
+      if (session) {
 
-        if (session) {
-
-          setTimeout(
-            loadApplication,
-            0
-          );
-
-        }
+        setTimeout(
+          loadApplication,
+          0
+        );
 
       }
-    );
-
-
-    const {
-      data: {
-        session
-      }
-    } =
-    await supabase.auth.getSession();
-
-
-    if (session) {
-
-      await loadApplication();
 
     }
+  );
+
+
+  const {
+    data: {
+      session
+    }
+  } =
+  await supabase.auth.getSession();
+
+
+  if (session) {
+
+    await loadApplication();
 
   }
 
 </script>
 
 </body>
-      
+</html>
