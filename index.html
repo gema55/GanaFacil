@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GanaFácil</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #06110b;
+      color: white;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .logo {
+      font-size: 32px;
+      font-weight: bold;
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    .logo span {
+      color: #39e879;
+    }
+
+    .card {
+      background: #0b1b12;
+      border: 1px solid #1d3c29;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 15px;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 13px;
+      margin: 7px 0;
+      border-radius: 10px;
+      box-sizing: border-box;
+    }
+
+    input {
+      background: #07140d;
+      border: 1px solid #294936;
+      color: white;
+    }
+
+    button {
+      background: #39e879;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .secondary {
+      background: #173622;
+      color: white;
+    }
+
+    .balance {
+      font-size: 38px;
+      font-weight: bold;
+      color: #39e879;
+      margin: 10px 0;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .task {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .task button {
+      width: auto;
+      padding: 10px 15px;
+    }
+
+    .muted {
+      color: #91a79a;
+      font-size: 14px;
+    }
+
+    .message {
+      padding: 10px;
+      background: #11251a;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="logo">
+    Gana<span>Fácil</span>
+  </div>
+
+  <!-- LOGIN -->
+  <div id="login">
+    <div class="card">
+      <h2>Iniciar sesión</h2>
+
+      <input id="loginEmail" type="email" placeholder="Correo electrónico">
+      <input id="loginPassword" type="password" placeholder="Contraseña">
+
+      <button onclick="login()">Entrar</button>
+
+      <button class="secondary" onclick="showRegister()">
+        Crear cuenta
+      </button>
+
+      <div id="loginMessage" class="message hidden"></div>
+    </div>
+  </div>
+
+  <!-- REGISTRO -->
+  <div id="register" class="hidden">
+    <div class="card">
