@@ -67,6 +67,11 @@
       cursor: pointer;
     }
 
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
     .secondary {
       background: #173622;
       color: white;
@@ -324,10 +329,8 @@
   const SUPABASE_URL =
     "https://vvcuvkdtkqmnbuujhpll.supabase.co";
 
-
   const SUPABASE_KEY =
     "sb_publishable_nFTz3WBpZ0b68QdPAB1BxQ_uHL5UM0f";
-
 
   const supabase =
     createClient(
@@ -423,7 +426,7 @@
 
 
   /*
-    LOGIN / REGISTRO
+    MOSTRAR REGISTRO
   */
 
   document
@@ -442,6 +445,10 @@
 
     };
 
+
+  /*
+    MOSTRAR LOGIN
+  */
 
   document
     .getElementById(
@@ -511,6 +518,15 @@
 
         options: {
 
+          /*
+            DIRECCIÓN A LA QUE SUPABASE
+            REGRESA DESPUÉS DE CONFIRMAR
+            EL CORREO
+          */
+
+          emailRedirectTo:
+            "http://localhost:3000",
+
           data: {
 
             Nombre: name,
@@ -552,7 +568,7 @@
 
         showMessage(
           registerMessage,
-          "Cuenta creada. Revisa tu correo si Supabase solicita confirmación."
+          "Cuenta creada. Revisa tu correo y confirma tu cuenta."
         );
 
       }
