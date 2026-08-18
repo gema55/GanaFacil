@@ -235,8 +235,6 @@
     class="hidden"
   >
 
-    <!-- SALDO -->
-
     <div class="card">
 
       <div class="muted">
@@ -321,9 +319,7 @@
 
 
   /*
-    ==========================================
     SUPABASE
-    ==========================================
   */
 
   const SUPABASE_URL =
@@ -331,6 +327,7 @@
 
   const SUPABASE_KEY =
     "sb_publishable_nFTz3WBpZ0b68QdPAB1BxQ_uHL5UM0f";
+
 
   const supabase =
     createClient(
@@ -426,7 +423,7 @@
 
 
   /*
-    MOSTRAR REGISTRO
+    CAMBIAR A REGISTRO
   */
 
   document
@@ -447,7 +444,7 @@
 
 
   /*
-    MOSTRAR LOGIN
+    CAMBIAR A LOGIN
   */
 
   document
@@ -519,13 +516,11 @@
         options: {
 
           /*
-            DIRECCIÓN A LA QUE SUPABASE
-            REGRESA DESPUÉS DE CONFIRMAR
-            EL CORREO
+            ENLACE PÚBLICO DE GANAFÁCIL
           */
 
           emailRedirectTo:
-            "http://localhost:3000",
+            "https://subtle-entremet-bb5d19.netlify.app",
 
           data: {
 
@@ -577,7 +572,7 @@
 
 
   /*
-    INICIAR SESIÓN
+    LOGIN
   */
 
   document
@@ -1013,7 +1008,7 @@
 
 
   /*
-    COMPROBAR SESIÓN
+    SESIÓN
   */
 
   supabase.auth.onAuthStateChange(
